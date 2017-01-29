@@ -9,11 +9,10 @@ import (
 )
 
 
-func initialHandler(w http.ResponseWriter, r *http.Request){
+func initialHandler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Hello World!")
     //Call on the handlers package
     handlers.InitialHandler(w, r)
-
 }
 
 func addRoommateHandler(w http.ResponseWriter, r *http.Request){
@@ -40,5 +39,8 @@ func main () {
     http.HandleFunc("/", initialHandler)
     http.HandleFunc("/add/roommate/", addRoommateHandler)
     http.HandleFunc("/add/task/", addTaskHandler)
-    http.ListenAndServe(":9300", nil)
+    go func (){
+        http.ListenAndServe(":9300", nil)
+    }
+   
 }

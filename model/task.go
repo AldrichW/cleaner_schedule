@@ -15,37 +15,37 @@ type TaskInterface interface {
 }
 
 type Task struct {
-    name, description string
-    assignedRoommate model.Roommate
-    possibleRoommates []model.Roommate
+    Name, Description string
+    AssignedRoommate model.Roommate // the roommate currently assigned to this Task
+    PossibleRoommates []model.Roommate  // all possible roommates who can get selected for this Task
 }
 
 func (t *Task) AddRoommates(roommates []model.Roommate) bool {
-    if(roommates == nil){
+    if roommates == nil {
         return false
     }
 
-    if t.possibleRoommates == nil {
-        t.possibleRoommates = roommates
+    if t.PossibleRoommates == nil {
+        t.PossibleRoommates = roommates
     } else {
-        t.possibleRoommates = append(t.possibleRoommates, roommates)
+        t.PossibleRoommates = append(t.possibleRoommates, roommates)
     }
 
     return true
 }
 
 func (t *Task) GetAllRoommates() []model.Roommate {
-    return t.possibleRoommates
+    return t.PossibleRoommates
 } 
 
 func (t *Task) GetAssignedRoommate() model.Roommate {
-    return t.assignedRoommate
+    return t.AssignedRoommate
 }
 
 func (t *Task) SetName(name string) {
-    t.name = name
+    t.Name = name
 }
 
 func (t *Task) SetDescription(desc string) {
-    t.description = desc
+    t.Description = desc
 }
